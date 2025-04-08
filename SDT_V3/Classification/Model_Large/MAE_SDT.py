@@ -280,7 +280,7 @@ class MS_Block(nn.Module):
             self.layer_scale2 = nn.Parameter(init_values * torch.ones((dim)), requires_grad=True)
 
     def forward(self, x):
-        # T, B, C, N = x.shape
+        T, B, C, N = x.shape
         if self.model=="base":
             x= x + self.rep_conv(self.lif(x).flatten(0, 1)).reshape(T, B, C, N)
         # TODO: need channel-wise layer scale, init as 1e-6
